@@ -69,6 +69,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+ /* margin-top:0.5rem;*/
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4005,7 +4006,7 @@ input[type=button].btn-block {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 0.80rem;
   line-height: inherit;
   white-space: nowrap;
 }
@@ -10024,7 +10025,7 @@ h3,
 h4,
 h5,
 h6 {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 h1 {
