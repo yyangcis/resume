@@ -1,33 +1,34 @@
 
-/* === Mobile-only fixes v2 (Employment overlapping Home) === */
-/* Paste at END of style.css OR include after style.css via <link rel="stylesheet" href="mobile_overrides.css"> */
+/* === Mobile-only fixes v3 (Stop Employment/Home overlap, preserve desktop exactly) === */
+/* Place AFTER style.css (link or paste bottom). */
 
-/* Navbar fixed on phones; reserve enough top space for content */
+/* Keep navbar relative on phones to match your base CSS; remove top padding hack */
 @media (max-width: 991.98px) {
   .ftco-navbar-light {
-    position: fixed !important;
-    top: 0; left: 0; right: 0;
+    position: relative !important;
     min-height: 56px;
     background: #ffffff !important;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    z-index: 1040;
+    z-index: 10;
   }
-  body { padding-top: 76px; } /* match navbar+shadow height */
+  body { padding-top: 0 !important; }
 }
 
-/* Ensure in-page anchors don't sit under the fixed navbar */
-@media (max-width: 991.98px) {
-  section[id] { scroll-margin-top: 84px; }
-}
-
-/* Hero: make sure it ends clearly before the next section */
+/* Give hero its own positioning context so the blue overlay cannot spill into next sections */
 @media (max-width: 991.98px) {
   .hero-wrap {
+    position: relative !important;  /* critical: contains the absolute .overlay */
     height: auto !important;
     min-height: 0 !important;
     padding-top: 16px;
-    padding-bottom: 24px;
-    margin-bottom: 8px;
+    padding-bottom: 28px;
+    margin-bottom: 12px;            /* ensure a visual gap before next section */
+  }
+  .hero-wrap .overlay {
+    width: 100% !important;
+    opacity: .06 !important;
+    z-index: 0 !important;
+    pointer-events: none;
   }
   .hero-wrap .row { flex-direction: column; }
   .hero-wrap .col-md-6 { width: 100%; }
@@ -39,25 +40,26 @@
     background-size: cover !important;
     background-position: center !important;
   }
-  .hero-wrap .col-md-6[style*="padding: 3rem"] {
-    padding: 1.25rem !important;
-  }
-  .hero-wrap .overlay {
-    width: 100%;
-    opacity: .06;
-  }
+  .hero-wrap .col-md-6[style*="padding: 3rem"] { padding: 1.25rem !important; }
   .mouse { bottom: 24px; }
 }
 
-/* Add a bit of breathing room to the first content section on phones */
+/* Make sure the Employment section (inside #background-section) starts clearly below hero */
 @media (max-width: 991.98px) {
   #background-section {
-    margin-top: 8px;
-    padding-top: 8px;
+    margin-top: 16px !important;
+    padding-top: 12px !important;
+    position: relative;  /* create stacking context just in case */
+    z-index: 1;
   }
 }
 
-/* Timeline / course rows: allow wrapping to prevent overflow */
+/* Since navbar is relative on phones, anchor offset can be small */
+@media (max-width: 991.98px) {
+  section[id] { scroll-margin-top: 24px; }
+}
+
+/* Timeline / course rows: wrap cleanly on small phones */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -71,7 +73,7 @@
   }
 }
 
-/* Industry cards & about list minor spacing */
+/* Minor spacing tweaks */
 @media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
