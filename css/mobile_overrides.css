@@ -88,3 +88,31 @@
   .industry-content { padding: 1rem 1.25rem; }
   .about-info li { margin-bottom: .25rem; }
 }
+
+
+/* === Add-on: bullets inline + navbar brand color (mobile only) === */
+@media (max-width: 767.98px) {
+  /* Keep the dot and text on the same visual line */
+  .resume-wrap .position-item {
+    position: relative !important;
+    padding-left: 1rem !important;   /* room for the dot */
+  }
+  .resume-wrap .position-item::before {
+    position: absolute !important;
+    left: 0 !important;
+    top: .6em !important;            /* vertically near first text line */
+    margin-right: 0 !important;
+    font-size: 0.9rem !important;    /* a bit smaller on phones */
+    line-height: 1 !important;
+  }
+}
+
+/* Mobile navbar brand color fix: keep brand black, first word pill white on blue */
+@media (max-width: 991.98px) {
+  .ftco-navbar-light .navbar-brand { color: #000000 !important; }
+  .ftco-navbar-light .navbar-brand span { color: inherit !important; }
+  .ftco-navbar-light .navbar-brand span:first-child {
+    background: #3e64ff !important;
+    color: #ffffff !important;
+  }
+}
