@@ -3707,9 +3707,6 @@ input[type="button"].btn-block {
   color: rgba(0, 0, 0, 0.9); }
   .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
     color: rgba(0, 0, 0, 0.9); }
-/* 原来是 .navbar-brand span { color: #fff; } */
-.navbar-brand span:first-child { color: #fff; }   /* 只让 Yukun 变白 */
-.navbar-brand span + span { color: inherit; }     /* Yang 继承 a 的黑色 */
 
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.5); }
@@ -8364,12 +8361,13 @@ h1, h2, h3, h4, h5,
       color: #000000;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      font-size: 24px; }
+/*      font-size: 24px;*/
+}
 
 /* 统一 logo 样式 */
 .navbar-brand {
   font-weight: 900;
-  font-size: 24px;          /* 保持一致字号 */
+/*  font-size: 24px;           保持一致字号 */
   position: relative;
   z-index: 0;
   padding: 0;               /* 去掉上下不同的 padding */
@@ -9879,4 +9877,53 @@ section.ftco-hireme > p.copyright {
 #research-section .heading-section {
   padding-bottom: 20px !important;  /* 想要更大就调这个值 */
 }
+
+
+
+/* ===== macOS cross‑browser fix: confine blue pill to "Yukun" only ===== */
+.ftco-navbar-light .navbar-brand { white-space: nowrap; }
+
+/* Stop using the wide :after background that can overlap "Yang" */
+.navbar-brand:after { content: none !important; }
+
+/* Make spans shrink-wrap their own backgrounds consistently across browsers */
+.navbar-brand span { display: inline-block; }
+
+/* Only the first span ("Yukun") keeps the blue pill + white text */
+.navbar-brand span:first-child {
+  background: #3e64ff;
+  color: #fff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  line-height: 1;
+}
+
+/* The second span ("Yang") reverts to the link's normal color */
+.navbar-brand span + span {
+  color: inherit;
+  background: transparent !important;
+  margin-left: 6px;
+}
+
+/* 1) 锁定两种状态下一致字号（用你的 24px，保持 Windows 现状） */
+.ftco-navbar-light .navbar-brand,
+.ftco-navbar-light.scrolled .navbar-brand {
+  font-size: 24px !important;
+  line-height: inherit;
+}
+
+/* 2) 蓝底只包住 “Yukun”，高度随行高，不再压缩行高 */
+.navbar-brand span { display: inline-block; }
+.navbar-brand span:first-child {
+  background:#3e64ff; color:#fff; border-radius:9999px;
+  padding: 0 12px;              /* 去掉上下 padding；高度跟随行高 */
+  line-height: inherit;         /* 关键：别用 line-height:1 */
+  display:inline-flex; align-items:center;
+}
+
+/* 3) “Yang” 继承原本颜色；仍保持自然空格（HTML 里留了空格） */
+.navbar-brand span + span { color: inherit; background:transparent !important; }
+
+/* 4) 关闭会“吃到 Yang”的整块 :after 蓝底 */
+.navbar-brand:after { content: none !important; }
 
