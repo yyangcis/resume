@@ -369,12 +369,19 @@ window.onload = function() {
   var $navbara = $('#navi a');
   
   $navbara.click(function(e){
-    //prevent the page from refreshing
+    // prevent the page from refreshing
     e.preventDefault();
-    //set the top offset animation and speed
+    var $target = $($(this).attr('href'));
+    if(!$target.length) return;
+
+    // Use actual navbar height + a small buffer to avoid overshoot on different devices
+    var navH = $('#ftco-navbar').outerHeight() || 0;
+    var buffer = 20; // fine-tune if needed
+
     $('html, body').animate({
-      scrollTop: $($(this).attr('href')).offset().top - 180
-},500);
+      scrollTop: $target.offset().top - navH - buffer
+    }, 500, 'easeInOutExpo');
+
     hash($(this).attr('href'));
   });
   
@@ -388,7 +395,8 @@ window.onload = function() {
   })
   $(window).scroll(function(e){
     // scrollTop retains the value of the scroll top with the reference at the middle of the page
-    var scrollTop = $(this).scrollTop() + ($(window).height()/4);
+    var navH = $('#ftco-navbar').outerHeight() || 0;
+    var scrollTop = $(this).scrollTop() + navH + 40;
     //cycle through the values in sections array
     for (var i in sections) {
       var section = sections[i];
