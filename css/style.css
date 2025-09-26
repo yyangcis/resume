@@ -9832,6 +9832,11 @@ textarea.form-control {
   .industry-media-wrap { min-height: 200px; }
 }
 
+/* 2. Email Me 按钮上方加间距 */
+.email-btn {
+  margin-top: 40px;  /* 按钮上方加空间 */
+}
+
 a.email-btn.btn-primary {
   background-color: #4caf50 !important;   /* 常态绿色 */
   border-color: #4caf50 !important;
@@ -9846,5 +9851,30 @@ a.email-btn.btn-primary:hover {
   box-shadow: 0 4px 12px rgba(27, 94, 32, 0.5);
 }
 
+/* ---- Copyright pinned to bottom of ftco-hireme (no changes to email button) ---- */
+.ftco-hireme { 
+  position: relative;               /* 让版权相对本区块定位 */
+  padding-bottom: 88px;             /* 给底部预留空间，避免和按钮相撞 */
+}
+
+/* Copyright pinned to bottom within ftco-hireme section */
+section.ftco-hireme { position: relative; }
+section.ftco-hireme > p.copyright {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* 只影响 Research 里标题+Domains+Methods 这一块与下面内容的间距 */
+#research-section .heading-section {
+  padding-bottom: 20px !important;  /* 想要更大就调这个值 */
+}
 
 
