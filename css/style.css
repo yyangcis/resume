@@ -8361,13 +8361,12 @@ h1, h2, h3, h4, h5,
       color: #000000;
       padding-top: 1rem;
       padding-bottom: 1rem;
-/*      font-size: 24px;*/
-}
+      font-size: 24px; }
 
 /* 统一 logo 样式 */
 .navbar-brand {
   font-weight: 900;
-/*  font-size: 24px;           保持一致字号 */
+  font-size: 24px;          /* 保持一致字号 */
   position: relative;
   z-index: 0;
   padding: 0;               /* 去掉上下不同的 padding */
@@ -9880,50 +9879,85 @@ section.ftco-hireme > p.copyright {
 
 
 
-/* ===== macOS cross‑browser fix: confine blue pill to "Yukun" only ===== */
-.ftco-navbar-light .navbar-brand { white-space: nowrap; }
-
-/* Stop using the wide :after background that can overlap "Yang" */
-.navbar-brand:after { content: none !important; }
-
-/* Make spans shrink-wrap their own backgrounds consistently across browsers */
-.navbar-brand span { display: inline-block; }
-
-/* Only the first span ("Yukun") keeps the blue pill + white text */
-.navbar-brand span:first-child {
-  background: #3e64ff;
-  color: #fff;
-  border-radius: 20px;
-  padding: 4px 12px;
-  line-height: 1;
-}
-
-/* The second span ("Yang") reverts to the link's normal color */
-.navbar-brand span + span {
-  color: inherit;
-  background: transparent !important;
-  margin-left: 6px;
-}
-
-/* 1) 锁定两种状态下一致字号（用你的 24px，保持 Windows 现状） */
+/* ======= Logo sizing fix (mac cross-browser) ======= */
+/* Keep the same font-size across states to avoid OS differences */
 .ftco-navbar-light .navbar-brand,
 .ftco-navbar-light.scrolled .navbar-brand {
-  font-size: 24px !important;
+  font-size: 24px !important;    /* match your custom rule (Windows look) */
   line-height: inherit;
 }
 
-/* 2) 蓝底只包住 “Yukun”，高度随行高，不再压缩行高 */
+/* Confine the blue pill to the first word and match previous visual height */
 .navbar-brand span { display: inline-block; }
 .navbar-brand span:first-child {
-  background:#3e64ff; color:#fff; border-radius:9999px;
-  padding: 0 12px;              /* 去掉上下 padding；高度跟随行高 */
-  line-height: inherit;         /* 关键：别用 line-height:1 */
-  display:inline-flex; align-items:center;
+  background: #3e64ff;
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0 12px;               /* no vertical padding; height follows line-height */
+  line-height: inherit;          /* do NOT compress line-height; keep original */
+  display: inline-flex;
+  align-items: center;
 }
 
-/* 3) “Yang” 继承原本颜色；仍保持自然空格（HTML 里留了空格） */
-.navbar-brand span + span { color: inherit; background:transparent !important; }
+/* Let the second word inherit normal color; keep natural word spacing from HTML */
+.navbar-brand span + span {
+  color: inherit;
+  background: transparent !important;
+}
 
-/* 4) 关闭会“吃到 Yang”的整块 :after 蓝底 */
+/* Remove the wide after-pseudo background that could overlap into "Yang" */
 .navbar-brand:after { content: none !important; }
 
+
+/* ===== Mobile layout fixes (<= 991.98px) ===== */
+@media (max-width: 991.98px) {
+  /* 1) Navbar: avoid overlay + ensure readable background */
+  .ftco-navbar-light {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    z-index: 1040;
+  }
+  body { padding-top: 64px; }  /* offset fixed navbar height */
+
+  /* 2) Hero: use natural height, stack content cleanly */
+  .hero-wrap { 
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+  .hero-wrap .row { flex-direction: column; }
+  .hero-wrap .col-md-6 { width: 100%; }
+
+  /* 3) Left image panel: consistent aspect on phones */
+  .img-about { width: 100%; }
+  .img-about .img {
+    width: 100% !important;
+    height: 48vw !important;           /* responsive height tied to viewport width */
+    max-height: 260px;                  /* cap height so it不会过高 */
+    background-size: cover !important;  /* fill the box */
+    background-position: center !important;
+  }
+
+  /* 4) Right text panel spacing */
+  .hero-wrap .col-md-6[style*="padding: 3rem"] {
+    padding: 1.25rem !important;
+  }
+}
+
+/* Tiny phones (<= 375px) */
+@media (max-width: 375px) {
+  .hero-wrap .col-md-6[style*="padding: 3rem"] {
+    padding: 1rem !important;
+  }
+  .hero-wrap h2 { font-size: 1.75rem !important; }
+}
+
+/* Industry 部分字体颜色统一为黑色 */
+.industry-content,
+.industry-content p,
+.industry-content li {
+  color: #000000 !important;
+}

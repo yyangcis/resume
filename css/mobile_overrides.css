@@ -116,3 +116,11 @@
     color: #ffffff !important;
   }
 }
+
+/* Industry 部分字体颜色统一为黑色 */
+.industry-content,
+.industry-content p,
+.industry-content li {
+  color: #000000 !important;
+}
+
