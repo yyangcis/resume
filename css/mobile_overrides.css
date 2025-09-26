@@ -1,14 +1,15 @@
 
-/* === Mobile-only fixes v8 (aggressive spacing + iPhone Safari guards) === */
+/* === Mobile-only fixes FINAL (balanced spacing from v5) === */
 /* Load AFTER style.css */
 
-/* Keep navbar non-fixed on phones */
+/* Navbar stays relative on phones */
 @media (max-width: 991.98px) {
   .ftco-navbar-light,
   .ftco-navbar-light.scrolled,
   .ftco-navbar-light.scrolled.awake,
   .ftco-navbar-light.scrolled.sleep {
     position: relative !important;
+    top: auto !important; left: auto !important; right: auto !important;
     background: #ffffff !important;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
     z-index: 10;
@@ -16,7 +17,7 @@
   body { padding-top: 0 !important; }
 }
 
-/* Reset any full-height behavior inside hero */
+/* Reset any forced full-height on phones */
 @media (max-width: 991.98px) {
   .js-fullheight,
   .hero-wrap,
@@ -26,18 +27,16 @@
   .hero-wrap .col-md-6.d-flex { align-items: stretch !important; }
 }
 
-/* Hero containment and BIG gap for iPhone Safari */
+/* Hero containment and spacing (balanced) */
 @media (max-width: 991.98px) {
   .hero-wrap {
     position: relative !important;
     display: block !important;
     overflow: hidden !important;
     padding-top: 16px;
-    padding-bottom: 72px !important; /* bigger bottom space */
-    margin-bottom: 40px !important;  /* bigger visual gap */
+    padding-bottom: 40px;   /* balanced bottom space */
+    margin-bottom: 20px;    /* balanced gap */
     z-index: 0 !important;
-    -webkit-transform: translateZ(0); /* iOS paint fix */
-    transform: translateZ(0);
   }
   .hero-wrap .overlay {
     position: absolute !important;
@@ -47,32 +46,29 @@
     z-index: -1 !important;
     pointer-events: none !important;
   }
-  .mouse { display: none !important; }
+  .mouse { display: none !important; } /* hide scroll arrow on phones */
 }
 
-/* Raise the section after hero and add extra top gap */
+/* First content section after hero */
 @media (max-width: 991.98px) {
   .hero-wrap + .ftco-section,
   #background-section {
-    margin-top: 40px !important;
-    padding-top: 28px !important;
+    margin-top: 20px !important;
+    padding-top: 16px !important;
     position: relative !important;
     z-index: 2 !important;
     background: #ffffff !important;
     clear: both !important;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
   #background-section .heading-section { position: relative !important; z-index: 3 !important; }
 }
 
-/* General ftco-section stacking on phones */
+/* Anchor offset */
 @media (max-width: 991.98px) {
-  .ftco-section { position: relative !important; z-index: 2 !important; }
-  section[id] { scroll-margin-top: 20px; }
+  section[id] { scroll-margin-top: 16px; }
 }
 
-/* Small phones wrapping */
+/* Timeline / course rows */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -84,6 +80,10 @@
     text-align: left !important;
     white-space: nowrap;
   }
+}
+
+/* Minor spacing */
+@media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
   .about-info li { margin-bottom: .25rem; }
