@@ -1,12 +1,16 @@
 
-/* === Mobile-only fixes v4 (strong separation Hero -> Employment) === */
+/* === Mobile-only fixes v5 (definitive: stop Employment/Home overlap) === */
 /* Load AFTER style.css (link or paste at bottom). */
 
-/* Keep navbar relative on phones; remove any body top padding from older overrides */
+/* 1) NAVBAR: On phones, never fix the navbar when scrolled (avoid content jump/overlap). */
 @media (max-width: 991.98px) {
-  .ftco-navbar-light {
+  .ftco-navbar-light,
+  .ftco-navbar-light.scrolled,
+  .ftco-navbar-light.scrolled.awake,
+  .ftco-navbar-light.scrolled.sleep {
     position: relative !important;
-    min-height: 56px;
+    top: auto !important; left: auto !important; right: auto !important;
+    margin-top: 0 !important;
     background: #ffffff !important;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
     z-index: 10;
@@ -14,12 +18,12 @@
   body { padding-top: 0 !important; }
 }
 
-/* Collapse any forced full-height on phones */
+/* 2) Collapse any forced full-height on phones */
 @media (max-width: 991.98px) {
   .js-fullheight { height: auto !important; min-height: 0 !important; }
 }
 
-/* Hero container: clip any child overflow and sit below next section */
+/* 3) HERO: Contain and push overlay behind everything else */
 @media (max-width: 991.98px) {
   .hero-wrap {
     position: relative !important;
@@ -27,15 +31,18 @@
     height: auto !important;
     min-height: 0 !important;
     padding-top: 16px;
-    padding-bottom: 36px;   /* extra bottom space */
-    margin-bottom: 16px;    /* visual gap */
-    z-index: 0 !important;
+    padding-bottom: 40px;   /* extra room */
+    margin-bottom: 20px;    /* visible gap */
+    z-index: 0 !important;  /* stacking base */
+    background-clip: padding-box;
   }
   .hero-wrap .overlay {
+    position: absolute !important;
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100% !important;
     opacity: .06 !important;
-    z-index: 0 !important;
-    pointer-events: none;
+    z-index: -1 !important;    /* push behind hero content AND below following sections */
+    pointer-events: none !important;
   }
   .hero-wrap .row { flex-direction: column; }
   .hero-wrap .col-md-6 { width: 100%; }
@@ -51,30 +58,25 @@
   .mouse { bottom: 24px; }
 }
 
-/* Critical: the first content section after hero must be clearly separated and above hero */
+/* 4) FIRST CONTENT SECTIONS: ensure they sit above hero and have solid background on phones */
 @media (max-width: 991.98px) {
-  .hero-wrap + .ftco-section {
-    margin-top: 20px !important;
-    padding-top: 16px !important;
-    position: relative !important;
-    z-index: 1 !important;
-  }
-  /* If your Employment is #background-section, ensure it wins too */
+  .hero-wrap + .ftco-section,
   #background-section {
     margin-top: 20px !important;
     padding-top: 16px !important;
     position: relative !important;
-    z-index: 1 !important;
+    z-index: 2 !important;       /* above hero (0) and overlay (-1) */
+    background: #ffffff !important; /* prevent translucent bleed-through */
     clear: both !important;
   }
 }
 
-/* Anchor offset on phones (navbar is relative) */
+/* 5) Anchor offset on phones (navbar is not fixed on phones now) */
 @media (max-width: 991.98px) {
-  section[id] { scroll-margin-top: 20px; }
+  section[id] { scroll-margin-top: 16px; }
 }
 
-/* Timeline / course rows: wrap on small phones */
+/* 6) Timeline / course rows: wrap on small phones */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -88,7 +90,7 @@
   }
 }
 
-/* Minor spacing */
+/* 7) Minor spacing */
 @media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
