@@ -1,8 +1,8 @@
 
-/* === Mobile-only fixes v6 (robust containment + height reset) === */
+/* === Mobile-only fixes v7 (iPhone Safari overlap target) === */
 /* Load AFTER style.css (link or paste at bottom). */
 
-/* 0) Normalize navbar on phones */
+/* A) NAVBAR stays non-fixed on phones */
 @media (max-width: 991.98px) {
   .ftco-navbar-light,
   .ftco-navbar-light.scrolled,
@@ -18,66 +18,60 @@
   body { padding-top: 0 !important; }
 }
 
-/* 1) HERO: absolutely ensure natural height on phones */
+/* B) Collapse any forced full-height on phones */
 @media (max-width: 991.98px) {
+  .js-fullheight,
   .hero-wrap,
   .hero-wrap .container-fluid,
   .hero-wrap .row,
   .hero-wrap .col-md-6 { height: auto !important; min-height: 0 !important; }
-
-  /* prevent flex children from forcing equal heights */
   .hero-wrap .col-md-6.d-flex { align-items: stretch !important; }
+}
 
+/* C) HERO containment and spacing */
+@media (max-width: 991.98px) {
   .hero-wrap {
     position: relative !important;
     display: block !important;
     overflow: hidden !important;
     padding-top: 16px;
-    padding-bottom: 44px;   /* generous bottom space */
-    margin-bottom: 24px;    /* clear gap to next section */
+    padding-bottom: 48px;    /* a bit more space */
+    margin-bottom: 28px;     /* bigger visual gap */
     z-index: 0 !important;
   }
   .hero-wrap .overlay {
     position: absolute !important;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
     width: 100% !important;
     opacity: .06 !important;
-    z-index: -1 !important;         /* sit behind everything */
+    z-index: -1 !important;
     pointer-events: none !important;
   }
-  .img-about { width: 100%; }
-  .img-about .img {
-    width: 100% !important;
-    height: 48vw !important;
-    max-height: 260px;
-    background-size: cover !important;
-    background-position: center !important;
-  }
-  .hero-wrap .col-md-6[style*="padding: 3rem"] { padding: 1.25rem !important; }
-  .mouse { bottom: 24px; }
+  /* Hide the big center diamond & arrow on phones to prevent overlap */
+  .mouse { display: none !important; }
 }
 
-/* 2) FIRST CONTENT SECTIONS: lift above hero and add spacing */
+/* D) The first content section after hero MUST be above hero and start below */
 @media (max-width: 991.98px) {
   .hero-wrap + .ftco-section,
   #background-section {
-    margin-top: 24px !important;
+    margin-top: 28px !important;
     padding-top: 20px !important;
     position: relative !important;
     z-index: 2 !important;
     background: #ffffff !important;
     clear: both !important;
   }
-  /* Ensure ftco-section generally stacks above hero on phones */
-  .ftco-section { position: relative !important; z-index: 2 !important; }
+  /* ensure its heading cannot visually collide */
+  #background-section .heading-section { margin-top: 0 !important; position: relative !important; z-index: 2 !important; }
 }
 
-/* 3) In-page anchor offset */
+/* E) Anchor offset on phones */
 @media (max-width: 991.98px) {
   section[id] { scroll-margin-top: 16px; }
 }
 
-/* 4) Timeline / course rows: wrap on small phones */
+/* F) Timeline / course rows: wrap on small phones */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -91,7 +85,7 @@
   }
 }
 
-/* 5) Minor spacing */
+/* G) Minor spacing */
 @media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
