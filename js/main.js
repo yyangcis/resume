@@ -270,20 +270,21 @@
   });
 
 
-  var goHere = function() {
+$('.mouse-icon').on('click', function(e){
+  e.preventDefault();
 
-		$('.mouse-icon').on('click', function(event){
-			
-			event.preventDefault();
+  // 精确找到 background-section
+  var $target = $('#background-section');
+  if(!$target.length) return;
 
-			$('html,body').animate({
-				scrollTop: $('.goto-here').offset().top
-			}, 500, 'easeInOutExpo');
-			
-			return false;
-		});
-	};
-	goHere();
+  // 导航栏高度 + 额外微调
+  var navH = $('#ftco-navbar').outerHeight() || 0;
+  var adjust = -28;  // 你可以改成 20 或 30，看效果满意不
+
+  $('html, body').animate({
+    scrollTop: $target.offset().top - navH - adjust
+  }, 600, 'easeInOutExpo');
+});
 
 	// $("#myScrollspy").scrollspy({ offset: -75 });
 
