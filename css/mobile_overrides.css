@@ -1,33 +1,41 @@
 
-/* === Mobile-only fixes: paste at END of your existing style.css OR include as a new file after style.css === */
+/* === Mobile-only fixes v2 (Employment overlapping Home) === */
+/* Paste at END of style.css OR include after style.css via <link rel="stylesheet" href="mobile_overrides.css"> */
 
-/* Keep navbar readable and non-overlapping on phones */
+/* Navbar fixed on phones; reserve enough top space for content */
 @media (max-width: 991.98px) {
   .ftco-navbar-light {
     position: fixed !important;
     top: 0; left: 0; right: 0;
+    min-height: 56px;
     background: #ffffff !important;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
     z-index: 1040;
   }
-  body { padding-top: 64px; }
+  body { padding-top: 76px; } /* match navbar+shadow height */
 }
 
-/* Hero section: stack cleanly, control image height, soften blue overlay */
+/* Ensure in-page anchors don't sit under the fixed navbar */
+@media (max-width: 991.98px) {
+  section[id] { scroll-margin-top: 84px; }
+}
+
+/* Hero: make sure it ends clearly before the next section */
 @media (max-width: 991.98px) {
   .hero-wrap {
     height: auto !important;
     min-height: 0 !important;
     padding-top: 16px;
     padding-bottom: 24px;
+    margin-bottom: 8px;
   }
   .hero-wrap .row { flex-direction: column; }
   .hero-wrap .col-md-6 { width: 100%; }
   .img-about { width: 100%; }
   .img-about .img {
     width: 100% !important;
-    height: 48vw !important;           /* responsive height */
-    max-height: 260px;                  /* avoid over-tall image */
+    height: 48vw !important;
+    max-height: 260px;
     background-size: cover !important;
     background-position: center !important;
   }
@@ -41,36 +49,31 @@
   .mouse { bottom: 24px; }
 }
 
-/* Tiny phones */
-@media (max-width: 375px) {
-  .hero-wrap .col-md-6[style*="padding: 3rem"] { padding: 1rem !important; }
-  .hero-wrap h2 { font-size: 1.75rem !important; }
+/* Add a bit of breathing room to the first content section on phones */
+@media (max-width: 991.98px) {
+  #background-section {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
 }
 
 /* Timeline / course rows: allow wrapping to prevent overflow */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
-  .course-row {
-    flex-wrap: wrap !important;
-    align-items: flex-start !important;
-  }
+  .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
   .course-left { flex: 1 1 100% !important; min-width: 0; }
   .course-right {
     min-width: 0 !important;
     width: 100% !important;
     margin-top: .25rem;
     text-align: left !important;
-    white-space: nowrap; /* keep dates on one line */
+    white-space: nowrap;
   }
 }
 
-/* Research/Industry cards: comfortable spacing on phones */
+/* Industry cards & about list minor spacing */
 @media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
-}
-
-/* About list spacing */
-@media (max-width: 767.98px) {
   .about-info li { margin-bottom: .25rem; }
 }
