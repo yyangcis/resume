@@ -1,0 +1,76 @@
+
+/* === Mobile-only fixes: paste at END of your existing style.css OR include as a new file after style.css === */
+
+/* Keep navbar readable and non-overlapping on phones */
+@media (max-width: 991.98px) {
+  .ftco-navbar-light {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    z-index: 1040;
+  }
+  body { padding-top: 64px; }
+}
+
+/* Hero section: stack cleanly, control image height, soften blue overlay */
+@media (max-width: 991.98px) {
+  .hero-wrap {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+  .hero-wrap .row { flex-direction: column; }
+  .hero-wrap .col-md-6 { width: 100%; }
+  .img-about { width: 100%; }
+  .img-about .img {
+    width: 100% !important;
+    height: 48vw !important;           /* responsive height */
+    max-height: 260px;                  /* avoid over-tall image */
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  .hero-wrap .col-md-6[style*="padding: 3rem"] {
+    padding: 1.25rem !important;
+  }
+  .hero-wrap .overlay {
+    width: 100%;
+    opacity: .06;
+  }
+  .mouse { bottom: 24px; }
+}
+
+/* Tiny phones */
+@media (max-width: 375px) {
+  .hero-wrap .col-md-6[style*="padding: 3rem"] { padding: 1rem !important; }
+  .hero-wrap h2 { font-size: 1.75rem !important; }
+}
+
+/* Timeline / course rows: allow wrapping to prevent overflow */
+@media (max-width: 767.98px) {
+  .resume-wrap .position-item,
+  .course-row {
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+  }
+  .course-left { flex: 1 1 100% !important; min-width: 0; }
+  .course-right {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin-top: .25rem;
+    text-align: left !important;
+    white-space: nowrap; /* keep dates on one line */
+  }
+}
+
+/* Research/Industry cards: comfortable spacing on phones */
+@media (max-width: 767.98px) {
+  .industry-media-wrap { min-height: 200px; }
+  .industry-content { padding: 1rem 1.25rem; }
+}
+
+/* About list spacing */
+@media (max-width: 767.98px) {
+  .about-info li { margin-bottom: .25rem; }
+}
