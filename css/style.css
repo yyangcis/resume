@@ -3707,6 +3707,9 @@ input[type="button"].btn-block {
   color: rgba(0, 0, 0, 0.9); }
   .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
     color: rgba(0, 0, 0, 0.9); }
+/* 原来是 .navbar-brand span { color: #fff; } */
+.navbar-brand span:first-child { color: #fff; }   /* 只让 Yukun 变白 */
+.navbar-brand span + span { color: inherit; }     /* Yang 继承 a 的黑色 */
 
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.5); }
@@ -9875,18 +9878,5 @@ section.ftco-hireme > p.copyright {
 /* 只影响 Research 里标题+Domains+Methods 这一块与下面内容的间距 */
 #research-section .heading-section {
   padding-bottom: 20px !important;  /* 想要更大就调这个值 */
-}
-.brand-highlight {
-  background-color: #3e64ff;   /* 蓝底 */
-  color: white;
-  padding: 2px 8px;
-  border-radius: 15px;
-  font-weight: 700;
-}
-
-.brand-normal {
-  color: black;
-  font-weight: 700;
-  margin-left: 4px;  /* 避免贴太紧 */
 }
 
