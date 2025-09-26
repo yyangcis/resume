@@ -1,8 +1,8 @@
 
-/* === Mobile-only fixes v3 (Stop Employment/Home overlap, preserve desktop exactly) === */
-/* Place AFTER style.css (link or paste bottom). */
+/* === Mobile-only fixes v4 (strong separation Hero -> Employment) === */
+/* Load AFTER style.css (link or paste at bottom). */
 
-/* Keep navbar relative on phones to match your base CSS; remove top padding hack */
+/* Keep navbar relative on phones; remove any body top padding from older overrides */
 @media (max-width: 991.98px) {
   .ftco-navbar-light {
     position: relative !important;
@@ -14,15 +14,22 @@
   body { padding-top: 0 !important; }
 }
 
-/* Give hero its own positioning context so the blue overlay cannot spill into next sections */
+/* Collapse any forced full-height on phones */
+@media (max-width: 991.98px) {
+  .js-fullheight { height: auto !important; min-height: 0 !important; }
+}
+
+/* Hero container: clip any child overflow and sit below next section */
 @media (max-width: 991.98px) {
   .hero-wrap {
-    position: relative !important;  /* critical: contains the absolute .overlay */
+    position: relative !important;
+    overflow: hidden !important;
     height: auto !important;
     min-height: 0 !important;
     padding-top: 16px;
-    padding-bottom: 28px;
-    margin-bottom: 12px;            /* ensure a visual gap before next section */
+    padding-bottom: 36px;   /* extra bottom space */
+    margin-bottom: 16px;    /* visual gap */
+    z-index: 0 !important;
   }
   .hero-wrap .overlay {
     width: 100% !important;
@@ -44,22 +51,30 @@
   .mouse { bottom: 24px; }
 }
 
-/* Make sure the Employment section (inside #background-section) starts clearly below hero */
+/* Critical: the first content section after hero must be clearly separated and above hero */
 @media (max-width: 991.98px) {
+  .hero-wrap + .ftco-section {
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  /* If your Employment is #background-section, ensure it wins too */
   #background-section {
-    margin-top: 16px !important;
-    padding-top: 12px !important;
-    position: relative;  /* create stacking context just in case */
-    z-index: 1;
+    margin-top: 20px !important;
+    padding-top: 16px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    clear: both !important;
   }
 }
 
-/* Since navbar is relative on phones, anchor offset can be small */
+/* Anchor offset on phones (navbar is relative) */
 @media (max-width: 991.98px) {
-  section[id] { scroll-margin-top: 24px; }
+  section[id] { scroll-margin-top: 20px; }
 }
 
-/* Timeline / course rows: wrap cleanly on small phones */
+/* Timeline / course rows: wrap on small phones */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -73,7 +88,7 @@
   }
 }
 
-/* Minor spacing tweaks */
+/* Minor spacing */
 @media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
