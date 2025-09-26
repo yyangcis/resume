@@ -9876,5 +9876,17 @@ section.ftco-hireme > p.copyright {
 #research-section .heading-section {
   padding-bottom: 20px !important;  /* 想要更大就调这个值 */
 }
+.brand-highlight {
+  background-color: #3e64ff;   /* 蓝底 */
+  color: white;
+  padding: 2px 8px;
+  border-radius: 15px;
+  font-weight: 700;
+}
 
+.brand-normal {
+  color: black;
+  font-weight: 700;
+  margin-left: 4px;  /* 避免贴太紧 */
+}
 
