@@ -1,16 +1,14 @@
 
-/* === Mobile-only fixes v7 (iPhone Safari overlap target) === */
-/* Load AFTER style.css (link or paste at bottom). */
+/* === Mobile-only fixes v8 (aggressive spacing + iPhone Safari guards) === */
+/* Load AFTER style.css */
 
-/* A) NAVBAR stays non-fixed on phones */
+/* Keep navbar non-fixed on phones */
 @media (max-width: 991.98px) {
   .ftco-navbar-light,
   .ftco-navbar-light.scrolled,
   .ftco-navbar-light.scrolled.awake,
   .ftco-navbar-light.scrolled.sleep {
     position: relative !important;
-    top: auto !important; left: auto !important; right: auto !important;
-    margin-top: 0 !important;
     background: #ffffff !important;
     box-shadow: 0 2px 8px rgba(0,0,0,.06);
     z-index: 10;
@@ -18,7 +16,7 @@
   body { padding-top: 0 !important; }
 }
 
-/* B) Collapse any forced full-height on phones */
+/* Reset any full-height behavior inside hero */
 @media (max-width: 991.98px) {
   .js-fullheight,
   .hero-wrap,
@@ -28,16 +26,18 @@
   .hero-wrap .col-md-6.d-flex { align-items: stretch !important; }
 }
 
-/* C) HERO containment and spacing */
+/* Hero containment and BIG gap for iPhone Safari */
 @media (max-width: 991.98px) {
   .hero-wrap {
     position: relative !important;
     display: block !important;
     overflow: hidden !important;
     padding-top: 16px;
-    padding-bottom: 48px;    /* a bit more space */
-    margin-bottom: 28px;     /* bigger visual gap */
+    padding-bottom: 72px !important; /* bigger bottom space */
+    margin-bottom: 40px !important;  /* bigger visual gap */
     z-index: 0 !important;
+    -webkit-transform: translateZ(0); /* iOS paint fix */
+    transform: translateZ(0);
   }
   .hero-wrap .overlay {
     position: absolute !important;
@@ -47,31 +47,32 @@
     z-index: -1 !important;
     pointer-events: none !important;
   }
-  /* Hide the big center diamond & arrow on phones to prevent overlap */
   .mouse { display: none !important; }
 }
 
-/* D) The first content section after hero MUST be above hero and start below */
+/* Raise the section after hero and add extra top gap */
 @media (max-width: 991.98px) {
   .hero-wrap + .ftco-section,
   #background-section {
-    margin-top: 28px !important;
-    padding-top: 20px !important;
+    margin-top: 40px !important;
+    padding-top: 28px !important;
     position: relative !important;
     z-index: 2 !important;
     background: #ffffff !important;
     clear: both !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
-  /* ensure its heading cannot visually collide */
-  #background-section .heading-section { margin-top: 0 !important; position: relative !important; z-index: 2 !important; }
+  #background-section .heading-section { position: relative !important; z-index: 3 !important; }
 }
 
-/* E) Anchor offset on phones */
+/* General ftco-section stacking on phones */
 @media (max-width: 991.98px) {
-  section[id] { scroll-margin-top: 16px; }
+  .ftco-section { position: relative !important; z-index: 2 !important; }
+  section[id] { scroll-margin-top: 20px; }
 }
 
-/* F) Timeline / course rows: wrap on small phones */
+/* Small phones wrapping */
 @media (max-width: 767.98px) {
   .resume-wrap .position-item,
   .course-row { flex-wrap: wrap !important; align-items: flex-start !important; }
@@ -83,10 +84,6 @@
     text-align: left !important;
     white-space: nowrap;
   }
-}
-
-/* G) Minor spacing */
-@media (max-width: 767.98px) {
   .industry-media-wrap { min-height: 200px; }
   .industry-content { padding: 1rem 1.25rem; }
   .about-info li { margin-bottom: .25rem; }
