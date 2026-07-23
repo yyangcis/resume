@@ -115,6 +115,19 @@
     background: #4b6ff0 !important;
     color: #ffffff !important;
   }
+
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link,
+  .ftco-navbar-light.scrolled .navbar-nav > .nav-item > .nav-link {
+    color: #111827 !important;
+  }
+
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link.active,
+  .ftco-navbar-light .navbar-nav > .nav-item.active > .nav-link,
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover,
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:focus,
+  .ftco-navbar-light.scrolled .navbar-nav > .nav-item > .nav-link.active {
+    color: #3e64ff !important;
+  }
 }
 
 /* Industry 部分字体颜色统一为黑色 */
@@ -156,6 +169,10 @@
   .industry-content-wrap,
   .industry-content {
     border-radius: 0 10px 10px 0;
+  }
+
+  .industry-content {
+    padding-top: 14px !important;
   }
 }
 
@@ -323,6 +340,22 @@ body {
 #service-section .page h3,
 .industry-title {
   color: #3e64ff !important;
+}
+
+#teaching-section .page h3,
+#service-section .page h3 {
+  font-size: 1.7rem !important;
+  line-height: 1.2 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  font-weight: 800 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+#teaching-section .page h3:first-child,
+#service-section .page h3:first-child {
+  margin-top: 0 !important;
 }
 
 #research-section .page > h2:not(.heading):first-child {
