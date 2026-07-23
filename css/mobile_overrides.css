@@ -307,18 +307,30 @@ body {
 
 .heading-section h2 {
   letter-spacing: 0;
+  color: #000000 !important;
 }
 
 #research-section .page > h2:not(.heading) {
-  color: #111827 !important;
+  color: #3e64ff !important;
   font-size: 1.7rem !important;
   line-height: 1.2;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+#teaching-section .page h3,
+#service-section .page h3,
+.industry-title {
+  color: #3e64ff !important;
 }
 
 #research-section .page > h2:not(.heading):first-child {
   margin-top: 0;
+}
+
+#research-section .page.five {
+  padding-top: 2rem;
 }
 
 #research-section .resume-wrap {
