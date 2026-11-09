@@ -64,7 +64,7 @@
 
 	    var href = $.attr(this, 'href');
 
-	    $('html, body').animate({
+	    $('html, body').stop(true).animate({
 	        scrollTop: $($.attr(this, 'href')).offset().top - 70
 	    }, 500, function() {
 	    	// window.location.hash = href;
@@ -275,7 +275,7 @@ $('.mouse-icon').on('click', function(e){
   var navH = $('#ftco-navbar').outerHeight() || 0;
   var adjust = -28;  // 你可以改成 20 或 30，看效果满意不
 
-  $('html, body').animate({
+  $('html, body').stop(true).animate({
     scrollTop: $target.offset().top - navH + 24
   }, 420);
 });
@@ -372,7 +372,7 @@ window.onload = function() {
     var navH = $('#ftco-navbar').outerHeight() || 0;
     var buffer = 20; // fine-tune if needed
 
-    $('html, body').animate({
+    $('html, body').stop(true).animate({
       scrollTop: $target.offset().top - navH - buffer
     }, 500, 'easeInOutExpo');
 
